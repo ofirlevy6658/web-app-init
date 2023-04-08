@@ -1,27 +1,54 @@
 'use client'
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import * as z from 'zod'
 import styled from 'styled-components'
 import Colors from '@/styles/Colors.js'
 
-const Login = () => {
-    const {handleSubmit, register} = useForm()
+import FormField from '../components/form/FormField'
+import Link from 'next/link'
+import {FaFacebook, FaGithub, FaGoogle, FaApple} from 'react-icons/fa'
 
-    const onSubmit = () => {
+const loginSchema = z.object({
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+})
+
+const Login = () => {
+    const {
+        handleSubmit,
+        control,
+        formState: {errors},
+    } = useForm({
+        resolver: zodResolver(loginSchema),
+    })
+
+    const onSubmit = (formData) => {
         // TODO: AUTH
+        console.log('form submitted', formData)
     }
 
     return (
         <Container>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <FormContainer>
-                    <label>Email</label>
-                    <FormInput {...register('email')}></FormInput>
-                    <label>Password</label>
-                    <FormInput {...register('password')}></FormInput>
-                    <Submit type="submit" value="Join Us"></Submit>
-                </FormContainer>
-            </form>
+            <AuthForm onSubmit={handleSubmit(onSubmit)}>
+                <FormHeader>Login</FormHeader>
+                <FormField label="email" control={control} errors={errors} />
+                <FormField label="password" control={control} errors={errors} />
+                <BottomContainer>
+                    <Submit type="submit" value="Enter" />
+                </BottomContainer>
+                <SocialContainer>
+                    <FacebookIcon size={35} />
+                    <GithubIcon size={35} />
+                    <GoogleIcon size={35} />
+                    <AppleIcon size={35} />
+                </SocialContainer>
+                <SignUpContainer>
+                    <SignUpTitle>Dont have an account yet?</SignUpTitle>
+                    <SignUpButton href="/signup">SignUp</SignUpButton>
+                </SignUpContainer>
+            </AuthForm>
         </Container>
     )
 }
@@ -30,26 +57,92 @@ export default Login
 
 const Container = styled.div`
     display: flex;
+    width: 40%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     padding: 20px;
-    height: 100%;
+    background-color: white;
 `
-const FormContainer = styled.div`
+
+const AuthForm = styled.form`
     display: flex;
+    height: 500px;
+    width: 400px;
+    padding: 30px;
     flex-direction: column;
-    text-align: center;
+    text-align: flex-start;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: ${Colors.GREY};
+`
+const FormHeader = styled.div`
+    display: flex;
+    align-items: flex-start;
+    font-size: 48px;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: ${Colors.MAIN_BLUE};
 `
 const Submit = styled.input`
-    border-radius: 16px;
     padding: 10px;
+    width: 100%;
     margin: 10px;
-    background-color: #89cff0;
-`
-const FormInput = styled.input`
+    border-radius: 4px;
+    border: 0.5px solid grey;
     height: 40px;
-    border-radius: 16px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    padding: 5px;
+    background-color: ${Colors.MAIN_BLUE};
+    color: white;
+    &:hover {
+        color: ${Colors.LIGHT_BLUE};
+    }
+    transition: color 0.2s ease;
 `
-const FormLabel = styled.div``
+const BottomContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed grey;
+`
+const SignUpTitle = styled.div``
+const SignUpContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+`
+const SignUpButton = styled(Link)`
+    &: hover {
+        color: ${Colors.MAIN_BLUE};
+    }
+    transition: color 0.2s ease;
+`
+const SocialContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    padding: 20px;
+`
+const FacebookIcon = styled(FaFacebook)`
+    &: hover {
+        color: #1877f2;
+    }
+`
+const GithubIcon = styled(FaGithub)`
+    &: hover {
+        color: black;
+    }
+`
+const AppleIcon = styled(FaApple)`
+    &: hover {
+        color: silver;
+    }
+`
+const GoogleIcon = styled(FaGoogle)`
+    &: hover {
+        color: green;
+    }
+`
