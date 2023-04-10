@@ -1,19 +1,15 @@
 'use client'
 import React from 'react'
 import styled from 'styled-components'
-import {Controller} from 'react-hook-form'
 import Texts from '@/styles/Texts'
 
-const FormField = ({label, control, errors, overrideLabel}) => {
+const FormField = ({label, register, errors, overrideLabel}) => {
     const error = errors?.[label]
+
     return (
         <Container>
             <FormLabel>{overrideLabel ?? label}</FormLabel>
-            <Controller
-                name={label}
-                control={control}
-                render={({field}) => <FormInput {...field} />}
-            />
+            <FormInput {...register(label)} />
             {error && <ErrorMessage>{error?.message}</ErrorMessage>}
         </Container>
     )
