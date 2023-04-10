@@ -5,7 +5,6 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import styled from 'styled-components'
 import Colors from '@/styles/Colors.js'
-
 import FormField from './form/FormField'
 import Link from 'next/link'
 import {FaFacebook, FaGithub, FaGoogle, FaApple} from 'react-icons/fa'
@@ -19,7 +18,7 @@ const loginSchema = z.object({
 const LoginForm = () => {
     const {
         handleSubmit,
-        control,
+        register,
         formState: {errors},
     } = useForm({
         resolver: zodResolver(loginSchema),
@@ -33,8 +32,8 @@ const LoginForm = () => {
     return (
         <AuthForm onSubmit={handleSubmit(onSubmit)}>
             <FormHeader>Login</FormHeader>
-            <FormField label="email" control={control} errors={errors} />
-            <FormField label="password" control={control} errors={errors} />
+            <FormField label="email" register={register} errors={errors} />
+            <FormField label="password" register={register} errors={errors} />
             <BottomContainer>
                 <Submit type="submit" value="Enter" />
             </BottomContainer>
@@ -130,11 +129,7 @@ const AppleIcon = styled(FaApple)`
     }
 `
 const GoogleIcon = styled(FaGoogle)`
-    &: hover {
-        color: white;
-        background: linear-gradient(to left, #4285f4, #db4437, #f4b400, #0f9d58);
+    &:hover {
+        color: green;
     }
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    border-radius: 10px;
 `

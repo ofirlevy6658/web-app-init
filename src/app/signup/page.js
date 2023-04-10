@@ -19,7 +19,7 @@ const registerSchema = z.object({
 const SignUp = () => {
     const {
         handleSubmit,
-        control,
+        register,
         formState: {errors},
     } = useForm({
         resolver: zodResolver(registerSchema),
@@ -34,11 +34,11 @@ const SignUp = () => {
         <Container>
             <AuthForm onSubmit={handleSubmit(onSubmit)}>
                 <FormHeader>SignUp</FormHeader>
-                <FormField label="email" control={control} errors={errors} />
-                <FormField label="password" control={control} errors={errors} />
+                <FormField label="email" register={register} errors={errors} />
+                <FormField label="password" register={register} errors={errors} />
                 <FormField
                     label="confirm_password"
-                    control={control}
+                    register={register}
                     errors={errors}
                     overrideLabel="Confirm password"
                 />
