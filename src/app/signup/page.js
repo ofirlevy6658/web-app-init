@@ -9,9 +9,10 @@ import Colors from '@/styles/Colors.js'
 import FormField from '../components/form/FormField'
 import Link from 'next/link'
 
-const loginSchema = z.object({
+const registerSchema = z.object({
     email: z.string().email('Invalid email address'),
     password: z.string().min(8, 'Password must be at least 8 characters'),
+    confirm_password: z.string().min(8, 'Password must be at least 8 characters'),
 })
 
 const SignUp = () => {
@@ -20,12 +21,11 @@ const SignUp = () => {
         control,
         formState: {errors},
     } = useForm({
-        resolver: zodResolver(loginSchema),
+        resolver: zodResolver(registerSchema),
     })
 
     const onSubmit = (formData) => {
-        // TODO: AUTH
-        console.log('form submitted', formData)
+        console.log('formData', formData)
     }
 
     return (
@@ -35,7 +35,7 @@ const SignUp = () => {
                 <FormField label="email" control={control} errors={errors} />
                 <FormField label="password" control={control} errors={errors} />
                 <FormField
-                    label="password"
+                    label="confirm_password"
                     control={control}
                     errors={errors}
                     overrideLabel="Confirm password"
