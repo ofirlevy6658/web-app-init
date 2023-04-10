@@ -8,7 +8,7 @@ import Colors from '@/styles/Colors.js'
 
 import FormField from '../components/form/FormField'
 import Link from 'next/link'
-import register from '../api/auth/register'
+import signup from '../api/auth/authApi'
 
 const registerSchema = z.object({
     email: z.string().email('Invalid email address'),
@@ -27,7 +27,7 @@ const SignUp = () => {
 
     const onSubmit = async (formData) => {
         const data = JSON.stringify(formData)
-        await register(data)
+        await signup(data)
     }
 
     return (
