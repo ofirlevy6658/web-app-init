@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "push": "git add . && git commit -m 'update' && git push origin main"
+    "push": "f() { yarn lint && git add . && git commit -am \"$@\" && git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
   },
   "dependencies": {
     "@fontsource/roboto": "^4.5.8",
