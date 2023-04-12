@@ -1,17 +1,16 @@
-name: Actions workflow
+name: Protect Branches
 
 on:
   push:
     branches:
-      - develop
       - main
+      - develop
 
 jobs:
-  run_github_actions:
+  prevent_push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: GitHub push message
-        run: echo 'successful push to GitHub'
+      - name: Fail if pushing directly to protected branches
+        run: |
+          echo "You cannot push directly to the 'main' or 'develop' branches. Please create a separate branch and submit a pull request."
+          exit 1
