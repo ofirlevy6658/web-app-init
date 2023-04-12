@@ -2,9 +2,7 @@ name: Actions workflow
 
 on:
   push:
-    branches-ignore:
-      - develop
-      - main
+    branches:
       - feature/*
       - bug/*
 
