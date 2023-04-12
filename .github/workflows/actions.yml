@@ -2,11 +2,11 @@ name: Actions workflow
 
 on:
     push:
-        branches:
-            - 'feature/*'
-            - 'bug/*'
-            - '!main'
-            - '!develop'
+        branches-ignore:
+            - master
+            - main
+            - '!feature/*'
+            - '!bug/*'
 
 jobs:
     run_github_actions:
