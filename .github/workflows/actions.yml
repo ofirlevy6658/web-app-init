@@ -5,8 +5,8 @@ on:
         branches:
             - '!main'
             - '!develop'
-            - 'feature/*'
-            - 'bug/*'
+            - 'feature/**'
+            - 'bug/**'
 
 jobs:
     run_github_actions:
