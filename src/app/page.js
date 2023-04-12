@@ -6,8 +6,9 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
 const roboto = Roboto({
-    weight: ['400', '500', '600', '700'],
+    weight: ['400', '500', '700', '900'],
     style: ['normal', 'italic'],
+    preload: false,
 })
 
 // const inter = Inter({subsets: ['latin']})

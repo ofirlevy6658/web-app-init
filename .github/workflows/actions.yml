@@ -1,0 +1,13 @@
+name: Actions workflow
+
+on:
+    push:
+        branches:
+            - 'feature/*'
+            - 'bug/*'
+jobs:
+    run_github_actions:
+        runs-on: ubuntu-latest
+        steps:
+            - name: github push message
+              run: echo 'successfull push to github'
