@@ -3,10 +3,10 @@ name: Actions workflow
 on:
     push:
         branches:
-            - 'feature/*'
-            - 'bug/*'
             - '!main'
             - '!develop'
+            - 'feature/*'
+            - 'bug/*'
 
 jobs:
     run_github_actions:
