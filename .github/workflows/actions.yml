@@ -1,16 +1,19 @@
 name: Actions workflow
 
 on:
-    push:
-        branches-ignore:
-            - develop
-            - main
-            - '!feature/*'
-            - '!bug/*'
+  push:
+    branches-ignore:
+      - develop
+      - main
+      - feature/*
+      - bug/*
 
 jobs:
-    run_github_actions:
-        runs-on: ubuntu-latest
-        steps:
-            - name: github push message
-              run: echo 'successful push to github'
+  run_github_actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: GitHub push message
+        run: echo 'successful push to GitHub'
