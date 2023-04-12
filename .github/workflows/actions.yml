@@ -5,9 +5,12 @@ on:
         branches:
             - 'feature/*'
             - 'bug/*'
+            - '!main'
+            - '!develop'
+
 jobs:
     run_github_actions:
         runs-on: ubuntu-latest
         steps:
             - name: github push message
-              run: echo 'successfull push to github'
+              run: echo 'successful push to github'
