@@ -12,7 +12,6 @@ const roboto = Roboto({
 })
 
 // const inter = Inter({subsets: ['latin']})
-console.log('Testr')
 export default function Home() {
     return <main className={roboto.className} />
 }

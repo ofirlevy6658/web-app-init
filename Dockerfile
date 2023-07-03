@@ -2,13 +2,13 @@ FROM node:16
 
 WORKDIR /usr/app/web-app-init
 
-COPY . .
+COPY package.json yarn.lock ./
 
 RUN yarn
 
-RUN yarn build
+COPY . .
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["yarn", "dev"]
 

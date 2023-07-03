@@ -1,0 +1,24 @@
+version: '3'
+volumes:
+    mongodb:
+
+services:
+    database:
+        container_name: mongo_mizpe_yam
+        image: 'mongo:5'
+        volumes:
+            - mongodb:/data/next/db
+        ports:
+            - '27019:27017'
+
+    next:
+        build: .
+        container_name: next-mitzpe-yam
+        ports:
+            - '3000:3000'
+        volumes:
+            - .:/usr/app/web-app-init
+        environment:
+            MONGO_URI: mongodb://localhost:27019/metzpe-yam-next_1
+        depends_on:
+            - database
