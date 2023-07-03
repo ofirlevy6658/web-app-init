@@ -1,4 +1,11 @@
+import {createUser} from '../../server_mvc/services/auth/user.js'
+
 export async function POST(req) {
-    const body = await req.json()
-    return new Response(JSON.stringify(body))
+    try {
+        const body = await req.json()
+        const response = await createUser(body)
+        return new Response(JSON.stringify(response))
+    } catch (error) {
+        console.log('error', error)
+    }
 }
